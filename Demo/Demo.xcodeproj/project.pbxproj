@@ -15,6 +15,10 @@
 		46A73360209C5684009CC3ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A7335F209C5684009CC3ED /* main.m */; };
 		46A7336A209C5684009CC3ED /* DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73369209C5684009CC3ED /* DemoTests.m */; };
 		46A73375209C5684009CC3ED /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73374209C5684009CC3ED /* DemoUITests.m */; };
+		46A7338B209C569B009CC3ED /* HTCKeyboardRes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46A73383209C569A009CC3ED /* HTCKeyboardRes.bundle */; };
+		46A7338C209C569B009CC3ED /* HTCPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73387209C569A009CC3ED /* HTCPopView.m */; };
+		46A7338D209C569B009CC3ED /* HTCListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73388209C569A009CC3ED /* HTCListView.m */; };
+		46A7338E209C569B009CC3ED /* HTCKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73389209C569A009CC3ED /* HTCKeyboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,14 @@
 		46A73370209C5684009CC3ED /* DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A73374209C5684009CC3ED /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		46A73376209C5684009CC3ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46A73383209C569A009CC3ED /* HTCKeyboardRes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HTCKeyboardRes.bundle; sourceTree = "<group>"; };
+		46A73384209C569A009CC3ED /* HTCListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCListView.h; sourceTree = "<group>"; };
+		46A73385209C569A009CC3ED /* HTCKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCKeyboard.h; sourceTree = "<group>"; };
+		46A73386209C569A009CC3ED /* HTCHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCHeader.h; sourceTree = "<group>"; };
+		46A73387209C569A009CC3ED /* HTCPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCPopView.m; sourceTree = "<group>"; };
+		46A73388209C569A009CC3ED /* HTCListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCListView.m; sourceTree = "<group>"; };
+		46A73389209C569A009CC3ED /* HTCKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCKeyboard.m; sourceTree = "<group>"; };
+		46A7338A209C569A009CC3ED /* HTCPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCPopView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,7 @@
 		46A7334F209C5682009CC3ED /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				46A73382209C569A009CC3ED /* HTCKeyboard */,
 				46A73350209C5682009CC3ED /* AppDelegate.h */,
 				46A73351209C5682009CC3ED /* AppDelegate.m */,
 				46A73353209C5682009CC3ED /* ViewController.h */,
@@ -130,6 +143,22 @@
 				46A73376209C5684009CC3ED /* Info.plist */,
 			);
 			path = DemoUITests;
+			sourceTree = "<group>";
+		};
+		46A73382209C569A009CC3ED /* HTCKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				46A73383209C569A009CC3ED /* HTCKeyboardRes.bundle */,
+				46A73384209C569A009CC3ED /* HTCListView.h */,
+				46A73385209C569A009CC3ED /* HTCKeyboard.h */,
+				46A73386209C569A009CC3ED /* HTCHeader.h */,
+				46A73387209C569A009CC3ED /* HTCPopView.m */,
+				46A73388209C569A009CC3ED /* HTCListView.m */,
+				46A73389209C569A009CC3ED /* HTCKeyboard.m */,
+				46A7338A209C569A009CC3ED /* HTCPopView.h */,
+			);
+			name = HTCKeyboard;
+			path = ../../HTCKeyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +267,7 @@
 				46A7335D209C5684009CC3ED /* LaunchScreen.storyboard in Resources */,
 				46A7335A209C5684009CC3ED /* Assets.xcassets in Resources */,
 				46A73358209C5682009CC3ED /* Main.storyboard in Resources */,
+				46A7338B209C569B009CC3ED /* HTCKeyboardRes.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,8 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A7338C209C569B009CC3ED /* HTCPopView.m in Sources */,
+				46A7338D209C569B009CC3ED /* HTCListView.m in Sources */,
 				46A73355209C5682009CC3ED /* ViewController.m in Sources */,
 				46A73360209C5684009CC3ED /* main.m in Sources */,
+				46A7338E209C569B009CC3ED /* HTCKeyboard.m in Sources */,
 				46A73352209C5682009CC3ED /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

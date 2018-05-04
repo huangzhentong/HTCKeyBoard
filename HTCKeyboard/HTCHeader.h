@@ -16,8 +16,6 @@
 #define SCREEN_HEIGHT  CGRectGetHeight([UIScreen mainScreen].bounds)
 
 
-#define HEIGHT 196// 240 - 44
-#define BUTTONTAG 5644
 
 #define HTCBUNDLE_NAME   @"HTCKeyboardRes.bundle"
 #define HTCBUNDLE_PATH   [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:HTCBUNDLE_NAME]

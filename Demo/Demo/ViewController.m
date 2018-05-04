@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "HTCKeyboard.h"
 @interface ViewController ()
 
 @end
@@ -16,6 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    HTCKeyboard *keyboard = [[HTCKeyboard alloc]initWithFrame:CGRectMake(0, 0, 375, 225+30)];
+    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(30, 30, 300, 300)];
+    textField.placeholder = @"请输入xxxxx";
+    textField.inputView = keyboard;
+    [self.view addSubview:textField];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
