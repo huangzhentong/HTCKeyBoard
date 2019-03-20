@@ -42,8 +42,7 @@ static __weak id currentFirstResponder;
 @property (nonatomic,strong)HTCListView *provinceView;
 @property (nonatomic,strong)HTCListView *letterView;
 
-@property (nonatomic,strong)NSMutableDictionary *buttonDictionary;
-@property (nonatomic,strong)NSMutableArray *unclickArray;                   //不可点击数组
+
 @end
 
 @implementation HTCKeyboard
@@ -67,13 +66,6 @@ static __weak id currentFirstResponder;
     return self;
 }
 
--(NSMutableArray*)unclickArray
-{
-    if (!_unclickArray) {
-        _unclickArray = [NSMutableArray new];
-    }
-    return _unclickArray;
-}
 
 - (void)initKeyboard{
     
@@ -82,13 +74,13 @@ static __weak id currentFirstResponder;
                                @[@"晋",@"蒙",@"陕",@"吉",@"闽",@"贵",@"渝",@"川"],
                                @[@"青",@"藏",@"琼",@"宁",@"使",@""]];
     self.provinceView.groupArray = provinceArray;
-//    [self createButttonWithGroupArray:provinceArray withMaxRow:10 withSpace:5 withTextFont:[UIFont systemFontOfSize:18 weight:UIFontWeightRegular] withSuperView:self.provinceView];
+
     
     NSArray *letterArray = @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0"],
                              @[@"Q",@"W",@"E",@"R",@"T",@"Y",@"U",@"O",@"P",@"A"],
                              @[@"S",@"D",@"F",@"G",@"H",@"J",@"K",@"L",@"X",@"Z"],
                              @[@"C",@"V",@"B",@"N",@"M",@"港",@"澳",@"学",@""]];
-//    [self createButttonWithGroupArray:leeterArray withMaxRow:10 withSpace:5 withTextFont:[UIFont systemFontOfSize:18 weight:UIFontWeightRegular] withSuperView:self.letterView];
+
     self.letterView.groupArray = letterArray;
     
     __weak typeof(self) weakSelf  = self;
@@ -105,58 +97,10 @@ static __weak id currentFirstResponder;
     self.letterView.backSpaceBtnEvent = backSpaceBlock;
     
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(highlightedPanGestureRecognizer:)];
-    [self addGestureRecognizer:pan];
+   
     [self changeButtonSelectWithIndex:0];
 }
 
-
-
--(void)createButttonWithGroupArray:(NSArray*)groupArray withMaxRow:(NSInteger)row withSpace:(CGFloat)space withTextFont:(UIFont*)font withSuperView:(UIView*)superView
-{
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    CGFloat width = (SCREEN_WIDTH -(row+1)*space)/row;
-    float height = (CGRectGetHeight(superView.frame) -14  -(groupArray.count-1)*space) / groupArray.count ;
-    
-    NSInteger line = 0;
-    for (NSArray *array in groupArray ) {
-        CGFloat x = space + (row - array.count)*width/2;
-        CGFloat y = space + (height+space)*line;
-        
-        for (int i = 0; i<array.count; i++) {
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button setBackgroundColor:[UIColor whiteColor]];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-            
-            //            HTCKeyboardButton *button = [HTCKeyboardButton keyboardButtonWithStyle:HTCKeyboardButtonStyleWhite];
-            [button setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-            button.frame = CGRectMake(x + (width+space)*i, y + 0.5, width - 0.5 , height - 0.5);
-            //            [button setExclusiveTouch:YES];
-            button.layer.cornerRadius = 5;
-            button.layer.masksToBounds = YES;
-            [button addTarget:self action:@selector(buttonPlayClick:) forControlEvents:UIControlEventTouchDown];
-            NSString *string = array[i];
-            if ([string isEqualToString:@""]) {
-                [button setImage:HTCLOAD_IMAGE(@"ic_keyboard_backspace_small") forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(buttonBackspace:) forControlEvents:UIControlEventTouchUpInside];
-                CGRect rect = button.frame;
-                rect.size.width += 10;
-                
-                button.frame  =  rect;
-            }else{
-                [button setTitle:array[i] forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(buttonInput:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            [superView addSubview:button];
-            [dic setObject:button forKey:string];
-        }
-        line ++ ;
-    }
-    [self.buttonDictionary setValuesForKeysWithDictionary:dic];
-    
-}
 
 
 
@@ -228,31 +172,6 @@ static __weak id currentFirstResponder;
     }
 }
 
-
-- (void)buttonPlayClick:(UIButton *)sender{
-    //    [[UIDevice currentDevice] playInputClick];
-}
-
-
-- (void)highlightedPanGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
-    
-    CGPoint point = [panGestureRecognizer locationInView:self];
-    
-    if (panGestureRecognizer.state == UIGestureRecognizerStateChanged || panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        
-        for (UIButton *button in self.buttonDictionary.objectEnumerator) {
-            BOOL points = CGRectContainsPoint(button.frame, point) && !button.isHidden ;
-            
-            if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
-                [button setHighlighted:points];
-            }else{
-                [button setHighlighted:NO];
-            }
-            
-            
-        }
-    }
-}
 
 
 
@@ -353,17 +272,6 @@ static __weak id currentFirstResponder;
     }
     return _letterView;
 }
-
-
-
-
-- (NSMutableDictionary *)buttonDictionary{
-    if (!_buttonDictionary) {
-        _buttonDictionary = [NSMutableDictionary dictionary];
-    }
-    return _buttonDictionary;
-}
-
 
 
 

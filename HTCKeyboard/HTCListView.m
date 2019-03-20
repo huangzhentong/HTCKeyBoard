@@ -79,7 +79,9 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             [button setBackgroundColor:[UIColor whiteColor]];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+          
             
+            [button addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew context:nil];
             button.frame = CGRectMake(x + (width+space)*i, y + 0.5, width - 0.5 , height - 0.5);
             button.layer.cornerRadius = 5;
             button.layer.masksToBounds = YES;
@@ -107,13 +109,37 @@
     if (self.backSpaceBtnEvent) {
         self.backSpaceBtnEvent(button);
     }
+    button.backgroundColor = [UIColor whiteColor];
 }
+
 -(void)buttonInput:(UIButton*)button
 {
     if (self.buttonInputEvent) {
         self.buttonInputEvent(button);
     }
+     button.backgroundColor = [UIColor whiteColor];
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"highlighted"]) {
+        if ([object isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton*)object;
+            BOOL isHighlighted = [change[@"new"] boolValue];
+            [button setBackgroundColor:isHighlighted?[UIColor lightGrayColor]:[UIColor whiteColor]];
+        }
+        
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+-(void)dealloc
+{
+    [self.btnDic.allValues enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeObserver:self forKeyPath:@"highlighted" context:nil];
+    }];
+}
+  
 
 - (void)longPressPageView:(UILongPressGestureRecognizer *)longPress
 {
