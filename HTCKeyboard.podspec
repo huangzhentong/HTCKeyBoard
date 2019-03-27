@@ -60,7 +60,7 @@ Pod::Spec.new do |s|
 
 
 
-  s.source_files  = "UIToolClass"
+  s.source_files  = "HTCKeyboard"
   s.exclude_files = "Classes/Exclude"
 
 
