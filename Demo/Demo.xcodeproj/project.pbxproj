@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		463E2512224B4C6E0076FD74 /* UIImage+Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 463E2511224B4C6E0076FD74 /* UIImage+Bundle.m */; };
+		463E2513224B4ED20076FD74 /* HTCKeyboardRes.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 46A73383209C569A009CC3ED /* HTCKeyboardRes.bundle */; };
 		46A73352209C5682009CC3ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73351209C5682009CC3ED /* AppDelegate.m */; };
 		46A73355209C5682009CC3ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A73354209C5682009CC3ED /* ViewController.m */; };
 		46A73358209C5682009CC3ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46A73356209C5682009CC3ED /* Main.storyboard */; };
@@ -39,7 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		46A7334D209C5682009CC3ED /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		463E2510224B4C6E0076FD74 /* UIImage+Bundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bundle.h"; sourceTree = "<group>"; };
+		463E2511224B4C6E0076FD74 /* UIImage+Bundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bundle.m"; sourceTree = "<group>"; };
+		46A7334D209C5682009CC3ED /* HTCKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTCKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A73350209C5682009CC3ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		46A73351209C5682009CC3ED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		46A73353209C5682009CC3ED /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -103,7 +107,7 @@
 		46A7334E209C5682009CC3ED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				46A7334D209C5682009CC3ED /* Demo.app */,
+				46A7334D209C5682009CC3ED /* HTCKeyboard.app */,
 				46A73365209C5684009CC3ED /* DemoTests.xctest */,
 				46A73370209C5684009CC3ED /* DemoUITests.xctest */,
 			);
@@ -152,6 +156,8 @@
 				46A73384209C569A009CC3ED /* HTCListView.h */,
 				46A73385209C569A009CC3ED /* HTCKeyboard.h */,
 				46A73386209C569A009CC3ED /* HTCHeader.h */,
+				463E2510224B4C6E0076FD74 /* UIImage+Bundle.h */,
+				463E2511224B4C6E0076FD74 /* UIImage+Bundle.m */,
 				46A73387209C569A009CC3ED /* HTCPopView.m */,
 				46A73388209C569A009CC3ED /* HTCListView.m */,
 				46A73389209C569A009CC3ED /* HTCKeyboard.m */,
@@ -164,9 +170,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		46A7334C209C5682009CC3ED /* Demo */ = {
+		46A7334C209C5682009CC3ED /* HTCKeyboard */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46A73379209C5684009CC3ED /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 46A73379209C5684009CC3ED /* Build configuration list for PBXNativeTarget "HTCKeyboard" */;
 			buildPhases = (
 				46A73349209C5682009CC3ED /* Sources */,
 				46A7334A209C5682009CC3ED /* Frameworks */,
@@ -176,9 +182,9 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = HTCKeyboard;
 			productName = Demo;
-			productReference = 46A7334D209C5682009CC3ED /* Demo.app */;
+			productReference = 46A7334D209C5682009CC3ED /* HTCKeyboard.app */;
 			productType = "com.apple.product-type.application";
 		};
 		46A73364209C5684009CC3ED /* DemoTests */ = {
@@ -252,7 +258,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				46A7334C209C5682009CC3ED /* Demo */,
+				46A7334C209C5682009CC3ED /* HTCKeyboard */,
 				46A73364209C5684009CC3ED /* DemoTests */,
 				46A7336F209C5684009CC3ED /* DemoUITests */,
 			);
@@ -296,6 +302,8 @@
 				46A7338D209C569B009CC3ED /* HTCListView.m in Sources */,
 				46A73355209C5682009CC3ED /* ViewController.m in Sources */,
 				46A73360209C5684009CC3ED /* main.m in Sources */,
+				463E2513224B4ED20076FD74 /* HTCKeyboardRes.bundle in Sources */,
+				463E2512224B4C6E0076FD74 /* UIImage+Bundle.m in Sources */,
 				46A7338E209C569B009CC3ED /* HTCKeyboard.m in Sources */,
 				46A73352209C5682009CC3ED /* AppDelegate.m in Sources */,
 			);
@@ -322,12 +330,12 @@
 /* Begin PBXTargetDependency section */
 		46A73367209C5684009CC3ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 46A7334C209C5682009CC3ED /* Demo */;
+			target = 46A7334C209C5682009CC3ED /* HTCKeyboard */;
 			targetProxy = 46A73366209C5684009CC3ED /* PBXContainerItemProxy */;
 		};
 		46A73372209C5684009CC3ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 46A7334C209C5682009CC3ED /* Demo */;
+			target = 46A7334C209C5682009CC3ED /* HTCKeyboard */;
 			targetProxy = 46A73371209C5684009CC3ED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -576,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46A73379209C5684009CC3ED /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		46A73379209C5684009CC3ED /* Build configuration list for PBXNativeTarget "HTCKeyboard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46A7337A209C5684009CC3ED /* Debug */,
