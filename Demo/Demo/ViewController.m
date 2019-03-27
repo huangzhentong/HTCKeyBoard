@@ -20,6 +20,9 @@
     UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(30, 30, 300, 300)];
     textField.placeholder = @"请输入xxxxx";
     textField.inputView = keyboard;
+    keyboard.btnNormalBackGroundColor = [UIColor redColor];
+    keyboard.btnHighlightedBackGroundColor = [UIColor greenColor];
+    keyboard.btnDisabledBackGroundColor = [UIColor yellowColor];
     [self.view addSubview:textField];
     // Do any additional setup after loading the view, typically from a nib.
 }

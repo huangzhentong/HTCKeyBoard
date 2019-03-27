@@ -15,6 +15,7 @@
 @property(nonatomic,strong)NSMutableDictionary *btnDic;                 //按钮字典
 @property(nonatomic,strong)NSMutableArray *unClickArray;                //不可点击数组
 @property(nonatomic,strong)HTCPopView *popView;
+@property(nonatomic,weak)UIButton *lastBtn;
 @end
 
 @implementation HTCListView
@@ -34,14 +35,14 @@
     
     for (UIButton *button in self.unClickArray) {
         button.enabled = YES;
-        [button setBackgroundColor:[UIColor whiteColor]];
+        [button setBackgroundColor:self.btnNormalBackGroundColor?:[UIColor whiteColor]];
     }
     
     for (NSString *key in disabledArray) {
         UIButton *button = self.btnDic[key];
         if (button) {
             button.enabled = NO;
-            [button setBackgroundColor:[UIColor lightGrayColor]];
+            [button setBackgroundColor:self.btnDisabledBackGroundColor?:[UIColor lightGrayColor]];
             [self.unClickArray addObject:button];
         }
     }
@@ -54,6 +55,48 @@
     return _popView;
 }
 
+
+
+
+#pragma mark - setBtnStatue
+-(void)setBtnNormalColor:(UIColor *)btnNormalColor
+{
+    _btnNormalColor = [btnNormalColor copy];
+    for (UIButton *button in self.btnDic.allValues) {
+        [button setTitleColor:btnNormalColor forState:UIControlStateNormal];
+    }
+}
+
+-(void)setBtnDisabledColor:(UIColor *)btnDisabledColor
+{
+    _btnDisabledColor = [btnDisabledColor copy];
+    for (UIButton *button in self.btnDic.allValues) {
+        [button setTitleColor:btnDisabledColor forState:UIControlStateDisabled];
+    }
+}
+-(void)setBtnHighlightedColor:(UIColor *)btnHighlightedColor
+{
+    _btnHighlightedColor = [btnHighlightedColor copy];
+    for (UIButton *button in self.btnDic.allValues) {
+        [button setTitleColor:btnHighlightedColor forState:UIControlStateHighlighted];
+    }
+}
+-(void)setBtnNormalBackGroundColor:(UIColor *)btnNormalBackGroundColor
+{
+    _btnNormalBackGroundColor = [btnNormalBackGroundColor copy];
+    for (UIButton *button in self.btnDic.allValues) {
+        [button setBackgroundColor:btnNormalBackGroundColor];
+    }
+}
+
+
+-(void)setFont:(UIFont *)font
+{
+    _font = [font copy];
+    for (UIButton *button in self.btnDic.allValues) {
+        button.titleLabel.font = font;
+    }
+}
 
 -(void)setupUI{
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressPageView:)];
@@ -77,10 +120,11 @@
         
         for (int i = 0; i<array.count; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button setBackgroundColor:[UIColor whiteColor]];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-          
-            
+            [button setBackgroundColor:self.btnNormalBackGroundColor?:[UIColor whiteColor]];
+            [button setTitleColor: self.btnNormalColor?: [UIColor blackColor] forState:UIControlStateNormal];
+            [button setTitleColor: self.btnHighlightedColor?: [UIColor blackColor] forState:UIControlStateHighlighted];
+            [button setTitleColor: self.btnDisabledColor?: [UIColor blackColor] forState:UIControlStateDisabled];
+            button.titleLabel.font = self.font?:[UIFont systemFontOfSize:15];
             [button addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew context:nil];
             button.frame = CGRectMake(x + (width+space)*i, y + 0.5, width - 0.5 , height - 0.5);
             button.layer.cornerRadius = 5;
@@ -109,7 +153,7 @@
     if (self.backSpaceBtnEvent) {
         self.backSpaceBtnEvent(button);
     }
-    button.backgroundColor = [UIColor whiteColor];
+    button.backgroundColor = self.btnNormalBackGroundColor?:[UIColor whiteColor];
 }
 
 -(void)buttonInput:(UIButton*)button
@@ -117,7 +161,7 @@
     if (self.buttonInputEvent) {
         self.buttonInputEvent(button);
     }
-     button.backgroundColor = [UIColor whiteColor];
+    button.backgroundColor = self.btnNormalBackGroundColor?:[UIColor whiteColor];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -126,7 +170,7 @@
         if ([object isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton*)object;
             BOOL isHighlighted = [change[@"new"] boolValue];
-            [button setBackgroundColor:isHighlighted?[UIColor lightGrayColor]:[UIColor whiteColor]];
+            [button setBackgroundColor:isHighlighted?(self.btnHighlightedBackGroundColor?:[UIColor lightGrayColor]):(self.btnNormalBackGroundColor?:[UIColor whiteColor])];
         }
         
     } else {
@@ -159,11 +203,20 @@
                 {
                     [self buttonInput:button];
                 }
+                button.highlighted = false;
             }
+            else
+            {
+                if (self.lastBtn.enabled) {
+                    self.lastBtn.highlighted = false;
+                }
+            }
+             self.lastBtn = nil;
             break;
             
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged: {
+       
             id content;
             NSString * text = button.titleLabel.text;
             if (text.length>0) {
@@ -173,6 +226,19 @@
             {
                 content = button.imageView.image;
             }
+            if (self.lastBtn == nil) {
+                self.lastBtn = button;
+            }
+            else if (self.lastBtn != button) {
+                if (self.lastBtn.enabled) {
+                    self.lastBtn.highlighted = false;
+                }
+                self.lastBtn = button;
+            }
+            if (button.enabled) {
+                button.highlighted = true;
+            }
+            
             [self.popView showFrom:button withContent:content];
             break;
         }

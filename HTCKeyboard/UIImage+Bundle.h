@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (Bundle)
 
-+(UIImage*)getBundleImage:(NSString*)imageName withType:(NSString*)type;
 +(UIImage*)getBundleImage:(NSString*)imageName ;
 @end
 

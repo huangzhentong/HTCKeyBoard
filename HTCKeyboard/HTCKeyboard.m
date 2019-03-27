@@ -41,6 +41,7 @@ static __weak id currentFirstResponder;
 
 @property (nonatomic,strong)HTCListView *provinceView;
 @property (nonatomic,strong)HTCListView *letterView;
+@property (nonatomic,weak) id <UIKeyInput> keyInput;
 
 
 @end
@@ -52,7 +53,7 @@ static __weak id currentFirstResponder;
     if (self) {
         
         [self initKeyboard];
-        //        [self initToolView];
+  
     }
     return self;
 }
@@ -267,12 +268,52 @@ static __weak id currentFirstResponder;
 - (HTCListView *)letterView{
     if (!_letterView) {
         _letterView = [[HTCListView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.frame.size.height)];
-        
+       
         [self addSubview:_letterView];
     }
     return _letterView;
 }
 
+
+
+#pragma mark btn
+-(void)setBtnNormalBackGroundColor:(UIColor *)btnNormalBackGroundColor
+{
+  
+    [self.provinceView performSelector:_cmd withObject:btnNormalBackGroundColor];
+    [self.letterView performSelector:_cmd withObject:btnNormalBackGroundColor];
+    
+}
+-(void)setBtnHighlightedBackGroundColor:(UIColor *)btnHighlightedBackGroundColor
+{
+    [self.provinceView performSelector:_cmd withObject:btnHighlightedBackGroundColor];
+    [self.letterView performSelector:_cmd withObject:btnHighlightedBackGroundColor];
+}
+-(void)setBtnDisabledBackGroundColor:(UIColor *)btnDisabledBackGroundColor
+{
+    [self.provinceView performSelector:_cmd withObject:btnDisabledBackGroundColor];
+    [self.letterView performSelector:_cmd withObject:btnDisabledBackGroundColor];
+}
+-(void)setBtnNormalColor:(UIColor *)btnNormalColor
+{
+    [self.provinceView performSelector:_cmd withObject:btnNormalColor];
+    [self.letterView performSelector:_cmd withObject:btnNormalColor];
+}
+-(void)setBtnHighlightedColor:(UIColor *)btnHighlightedColor
+{
+    [self.provinceView performSelector:_cmd withObject:btnHighlightedColor];
+    [self.letterView performSelector:_cmd withObject:btnHighlightedColor];
+}
+-(void)setBtnDisabledColor:(UIColor *)btnDisabledColor
+{
+    [self.provinceView performSelector:_cmd withObject:btnDisabledColor];
+    [self.letterView performSelector:_cmd withObject:btnDisabledColor];
+}
+-(void)setFont:(UIFont *)font
+{
+    [self.provinceView performSelector:_cmd withObject:font];
+    [self.letterView performSelector:_cmd withObject:font];
+}
 
 
 

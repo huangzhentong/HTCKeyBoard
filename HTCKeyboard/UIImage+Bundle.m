@@ -16,21 +16,20 @@
 
 +(NSBundle*)getBundel
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[HTCKeyboard class]];
-    NSURL *url = [bundle URLForResource:@"HTCKeyboardRes" withExtension:@"bundle"];
-    NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+   static  NSBundle *imageBundle = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSBundle *bundle = [NSBundle bundleForClass:[HTCKeyboard class]];
+        NSURL *url = [bundle URLForResource:@"HTCKeyboardRes" withExtension:@"bundle"];
+         imageBundle = [NSBundle bundleWithURL:url];
+    });
     
     return imageBundle;
 }
-+(UIImage*)getBundleImage:(NSString*)imageName withType:(NSString*)type
-{
-    NSString *path = [[self getBundel] pathForResource:imageName ofType:type];
-    
-    return [UIImage imageWithContentsOfFile:path];
-}
+
 +(UIImage*)getBundleImage:(NSString*)imageName
 {
-    return [self getBundleImage:imageName withType:@"png"];
+   return  [UIImage imageNamed:imageName inBundle:[self getBundel] compatibleWithTraitCollection:nil];
 }
 
 @end

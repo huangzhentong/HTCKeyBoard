@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface HTCKeyboard : UIInputView<UITextInputDelegate>
-@property (nonatomic,weak) id <UIKeyInput> keyInput;
 
-@property (nonatomic,assign) BOOL isAutoScroll;
+//按钮背景颜色
+@property(nonatomic,copy)UIColor *btnNormalBackGroundColor;
+@property(nonatomic,copy)UIColor *btnHighlightedBackGroundColor;
+@property(nonatomic,copy)UIColor *btnDisabledBackGroundColor;
+//按钮字体颜色
+@property(nonatomic,copy)UIColor *btnNormalColor;
+@property(nonatomic,copy)UIColor *btnHighlightedColor;
+@property(nonatomic,copy)UIColor *btnDisabledColor;
+@property(nonatomic,copy)UIFont *font;
+//@property (nonatomic,assign) BOOL isAutoScroll;
 @end
